@@ -21,10 +21,11 @@ class SMS {
   }
 
   init() {
+    let url = process.env.DOCKER_MOSQUITTO_PORT || constants.mqtt.URL;
     console.log(process.env.DOCKER_MOSQUITTO_PORT);
-    this.client = mqtt.connect(process.env.DOCKER_MOSQUITTO_PORT || constants.mqtt.URL);
+    this.client = mqtt.connect(url);
     this.client.on(constants.mqtt.CONNECT_TOPIC, () => {
-			this.outputText("SMS connected to MQTT - " + constants.mqtt.URL);
+			this.outputText("SMS connected to MQTT - " + url);
       this.client.subscribe(constants.mqtt.SMS_TOPIC, {qos: 2});
 		});  	
     this.client.on("message", (topic, payload) => {

@@ -9,7 +9,7 @@ The following steps assume that you have Docker already installed on your machin
 3. verify you have a new image: `docker images`
 4. run the image: `docker run -P --name docker-sms --link docker-mosquitto:docker-mosquitto <your username>/docker-sms`
 5. open another terminal window
-6. `mosquitto_pub -h broker.hivemq.com -p 1883 -t dc/send-sms -m '{"to": "<your mobile number>", "subject":"Text 1","text":"hello matt"}`
+6. `mosquitto_pub -h broker.hivemq.com -p 1883 -t dc/send-sms -m '{"to": "<your mobile number>", "subject":"Text 1","text":"hello matt"}'`
 7. verify you received a text on your mobile
 
 If you want to kill the Docker process execute the following command in a terminal window:

@@ -2,35 +2,23 @@
 This is a sample SMS app using MQTT ready for Docker.
 
 ## Installation Steps
+The following steps assume that you have Docker already installed on your machine (https://docs.docker.com/linux/):
 
-1. install mosquitto from http://mosquitto.org/download/
-2. open a terminal window and navigate to where your cloned this repository
-3. `npm install`
-4. open another terminal window
-5. `/usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf`
-6. go to first terminal window
-7. `cd src/server`
-8. `node server.js`
+1. open a terminal window and navigate to where your cloned this repository
+2. build the image: `docker build -t <your username>/docker-sms .`
+3. verify you have a new image: `docker images`
+4. run the image: `docker run -d <your username>/docker-sms`
+5. open another terminal window
+6. `mosquitto_pub -h broker.hivemq.com -p 1883 -t dc/send-sms -m '{"to": "<your mobile number>", "subject":"Text 1","text":"hello matt"}`
+7. verify you received a text on your mobile
 
-## Testing the MQTT services
-Open a terminal window and proceed with either of the scenarios. Keep the terminal window where node is running the server to see the stdout messages.
+If you want to kill the Docker process execute the following command in a terminal window:
+`docker ps -a | grep docker-sms`
+
+You will be presented with any matching information. You can get the find the unique id of the prcess and execute the following command to stop it:
+`docker stop <pid>`
 
 ### Sending a text
 ```
-mosquitto_pub -t dc/sms -m "get sms ready"
 mosquitto_pub -t dc/send-sms -m '{"to":"<ENTER PHONE NUMBER>","text":"hello mobile"}'
-```
-
-## Publishing a Mosquitto topic from Commandline
-
-```
-mosquitto_pub -t dc/matt -m "hello world"
-```
-
-You need to ensure that you either have a wild card or using a specific topic.
-
-## Subscribing to a Mosquitto topic using a wild card from commandline
-
-```
-mosquitto_sub -t dc/#
 ```

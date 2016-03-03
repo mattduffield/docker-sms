@@ -21,7 +21,8 @@ class SMS {
   }
 
   init() {
-    this.client = mqtt.connect(constants.mqtt.URL);
+    console.log(process.env.DOCKER_MOSQUITTO_PORT);
+    this.client = mqtt.connect(process.env.DOCKER_MOSQUITTO_PORT || constants.mqtt.URL);
     this.client.on(constants.mqtt.CONNECT_TOPIC, () => {
 			this.outputText("SMS connected to MQTT - " + constants.mqtt.URL);
       this.client.subscribe(constants.mqtt.SMS_TOPIC, {qos: 2});

@@ -6,8 +6,8 @@ class Constants {
 	}
 }
 const mqtt = {
-	// URL: "mqtt://localhost:1883",
-	URL: "mqtt://broker.hivemq.com:1883",
+	URL: "mqtt://localhost:1883",
+	//URL: "mqtt://broker.hivemq.com:1883",
 	CONNECT_TOPIC: "connect", 
 	MESSAGE_TOPIC: "message",
 	CONNECTED_TOPIC: "dc/connected",

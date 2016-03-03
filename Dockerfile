@@ -20,7 +20,7 @@ WORKDIR /src
 ADD ./src /src
 
 # Expose port
-EXPOSE 1883
+#EXPOSE 1883
 
 # Run app using node
 CMD ["node", "/src/server.js"]
